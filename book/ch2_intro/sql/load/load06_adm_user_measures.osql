@@ -1,0 +1,16 @@
+--name:load06_adm_user_measures
+--author:kenfujii
+--create time:2018-02-21 10:19
+
+ALTER TABLE adm_user_measures ADD IF NOT EXISTS PARTITION(dt = '${bizdate}');
+
+INSERT OVERWRITE TABLE adm_user_measures PARTITION(dt = '${bizdate}')
+  SELECT u.device,
+         COUNT(*) AS pv,
+         COUNT(DISTINCT u.uid) AS uv
+  FROM dw_log_fact f
+    JOIN dim_user_info u
+      ON f.uid = u.uid
+    AND u.identity = 'user'
+    AND f.dt = '${bizdate}'
+  GROUP BY u.device;

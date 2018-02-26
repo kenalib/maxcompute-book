@@ -1,0 +1,11 @@
+--name:load08_adm_user_measures_weekly
+--author:kenfujii
+--create time:2018-02-21 10:21
+
+ALTER TABLE adm_user_measures_weekly ADD IF NOT EXISTS PARTITION (dt='${bizdate1}');
+
+INSERT OVERWRITE TABLE adm_user_measures_weekly PARTITION(dt = '${bizdate1}')
+  SELECT dt, sum(pv), sum(uv)
+  FROM adm_user_measures
+--  WHERE dt >= '${bizdate1}' AND dt < '${bizdate2}'
+  GROUP BY dt;

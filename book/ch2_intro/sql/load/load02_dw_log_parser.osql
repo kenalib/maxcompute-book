@@ -1,0 +1,19 @@
+--name:load02_dw_log_parser
+--author:kenfujii
+--create time:2018-02-21 10:12
+
+ALTER TABLE dw_log_parser ADD IF NOT EXISTS PARTITION(dt = '${bizdate}');
+
+INSERT OVERWRITE TABLE dw_log_parser PARTITION(dt = '${bizdate}')
+  SELECT ip,
+         user,
+         time,
+         regexp_substr(request, "(^[^ ]+ )") AS method,
+         regexp_extract(request, "^[^ ]+ (.*) [^ ]+$") AS url,
+         regexp_substr(request, "([^ ]+$)") AS protocol,
+         status,
+         size,
+         referer,
+         agent
+  FROM ods_log_tracker
+  WHERE dt = '${bizdate}';

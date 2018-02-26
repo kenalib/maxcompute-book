@@ -1,0 +1,5 @@
+--name:load01_ods_log_tracker
+--author:kenfujii
+--create time:2018-02-21 09:27
+
+ALTER TABLE ods_log_tracker ADD IF NOT EXISTS PARTITION(dt = '${bizdate}');

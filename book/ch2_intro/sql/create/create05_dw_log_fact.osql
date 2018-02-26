@@ -1,0 +1,16 @@
+--name:create_table_5
+--author:kenfujii
+--create time:2018-02-16 17:34
+
+DROP TABLE IF EXISTS dw_log_fact;
+
+CREATE TABLE dw_log_fact(
+  uid     STRING COMMENT 'unique user id',
+  time    DATETIME,
+  method  STRING COMMENT 'HTTP request type, such as GET POST...',
+  url     STRING,
+  status  BIGINT COMMENT 'HTTP reponse code from server',
+  size    BIGINT,
+  referer STRING)
+PARTITIONED BY(dt STRING);
+

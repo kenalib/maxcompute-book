@@ -1,0 +1,9 @@
+--name:08_adm_user_measures_weekly
+--author:kenfujii
+--create time:2018-02-19 14:19
+
+CREATE TABLE IF NOT EXISTS adm_user_measures_weekly(
+  DAY STRING,
+  pv  BIGINT,
+  uv  BIGINT)
+PARTITIONED BY(dt STRING);

@@ -1,0 +1,35 @@
+--name:load03_dw_log_detail
+--author:kenfujii
+--create time:2018-02-21 10:14
+
+ALTER TABLE dw_log_detail ADD IF NOT EXISTS PARTITION(dt = '${bizdate}');
+
+INSERT OVERWRITE TABLE dw_log_detail PARTITION(dt = '${bizdate}')
+  SELECT ip,
+         time,
+         method,
+         url,
+         protocol,
+         status,
+         size,
+         regexp_extract(referer, "^[^/]+://([^/]+){1}") AS referer,
+         agent,
+         CASE
+         WHEN tolower(agent) RLIKE "android" THEN "android"
+         WHEN tolower(agent) RLIKE "iphone" THEN "iphone"
+         WHEN tolower(agent) RLIKE "ipad" THEN "ipad"
+         WHEN tolower(agent) RLIKE "macintosh" THEN "macintosh"
+         WHEN tolower(agent) RLIKE "windows phone" THEN "windows_phone"
+         WHEN tolower(agent) RLIKE "windows" THEN "windows_pc"
+         ELSE "unknown"
+         END AS device,
+         CASE
+         WHEN tolower(agent) RLIKE "(bot|spider|crawler|slurp)" THEN "crawler"
+         WHEN tolower(agent) RLIKE "feed" OR url RLIKE "feed" THEN "feed"
+         WHEN tolower(agent) NOT RLIKE "(bot|spider|crawler|feed|slurp)"
+         AND agent RLIKE "^[Mozilla|Opera]"
+         AND url NOT RLIKE "feed" THEN "user"
+         ELSE "unknown"
+         END AS identity
+  FROM dw_log_parser
+  WHERE url NOT RLIKE "^[/]+wp-" AND dt = '${bizdate}';

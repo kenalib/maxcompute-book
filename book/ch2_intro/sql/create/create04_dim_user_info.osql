@@ -1,0 +1,14 @@
+--name:create_table_4
+--author:kenfujii
+--create time:2018-02-16 17:34
+
+DROP TABLE IF EXISTS dim_user_info;
+
+CREATE TABLE dim_user_info(
+  uid      STRING COMMENT 'unique user id',
+  ip       STRING COMMENT 'client ip address',
+  city     STRING,
+  device   STRING,
+  protocol STRING,
+  identity STRING COMMENT 'user, crawler, feed',
+  agent    STRING);

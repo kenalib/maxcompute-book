@@ -1,0 +1,10 @@
+--name:07_adm_refer_info
+--author:kenfujii
+--create time:2018-02-19 14:13
+
+DROP TABLE IF EXISTS adm_refer_info;
+
+CREATE TABLE adm_refer_info(
+  referer STRING,
+  COUNT   BIGINT)
+PARTITIONED BY(dt STRING);
