@@ -1,0 +1,17 @@
+# Mac
+.DS_Store
+ 
+# Maven
+target/
+
+# R
+.Rhistory
+
+# IDE
+.idea/workspace.xml
+
+##############################
+
+temp/
+mr_ut_local_jobs/
+book/ch2_intro/data/
