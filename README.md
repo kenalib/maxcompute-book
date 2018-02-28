@@ -4,8 +4,10 @@
 
 Updated sample code in ODPS权威指南
 
+![ODPS Book Image](ODPS_book.jpg)
 
-## initial setup
+
+## Initial setup
 
 ### setup ODPS console
 
@@ -21,10 +23,12 @@ end_point=http://service.ap-southeast-1.maxcompute.aliyun.com/api
 # c.f. end point list: https://www.alibabacloud.com/help/doc-detail/34951.htm
 ```
 
-### setup IDE and R
+### setup IntelliJ IDEA and MaxCompute Studio
 
 * install https://www.jetbrains.com/idea/download/
 * install https://plugins.jetbrains.com/plugin/9193-maxcompute-studio
+
+### setup R and RStudio
 
 * install https://www.r-project.org/
 * install https://www.rstudio.com/products/rstudio/download/
@@ -53,3 +57,7 @@ end_point=http://service.ap-southeast-1.maxcompute.aliyun.com/api
 ## Reference
 
 * ODPS权威指南 https://www.amazon.cn/dp/B00QIIBG24
+* Meifang's Repo https://github.com/duckrun/odps_book
+* Official Doc CN https://help.aliyun.com/product/27797.html
+* Official Doc EN https://www.alibabacloud.com/help/product/27797.htm
+* MaxCompute Studio https://help.aliyun.com/document_detail/50889.html
