@@ -54,6 +54,11 @@ end_point=http://service.ap-southeast-1.maxcompute.aliyun.com/api
 * open R scripts from RStudio and push "Source" to draw charts
 
 
+## Chapter 3
+
+please check [Chapter 3 README](book/ch3_tunnel/)
+
+
 ## Reference
 
 * ODPS权威指南 https://www.amazon.cn/dp/B00QIIBG24

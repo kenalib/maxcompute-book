@@ -15,3 +15,7 @@ target/
 temp/
 mr_ut_local_jobs/
 book/ch2_intro/data/
+book/ch3_tunnel/input/*
+book/ch3_tunnel/output/*
+book/ch3_tunnel/log/*
+!.gitkeep
