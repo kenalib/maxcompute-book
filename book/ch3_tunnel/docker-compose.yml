@@ -1,0 +1,17 @@
+version: '2'
+services:
+    sshd_1:
+        build: .
+        image: test_sshd
+        ports:
+            - "32801:22"
+    sshd_2:
+        build: .
+        image: test_sshd
+        ports:
+            - "32802:22"
+    sshd_3:
+        build: .
+        image: test_sshd
+        ports:
+            - "32803:22"
