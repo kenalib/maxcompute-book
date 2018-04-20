@@ -3,14 +3,12 @@
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
 cd ${SCRIPT_DIR}/..
 
-ODPSCMD=~/bin/odpscmd_public/bin/odpscmd
-
 
 function download_table() {
     TABLE=${1}
     DATE=${2}
 
-    ${ODPSCMD} -e "
+    odpscmd -e "
     tunnel download ${TABLE}/dt=$DATE data/output/$DATE/${TABLE}.csv;
     "
 }

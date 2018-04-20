@@ -3,13 +3,11 @@
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
 cd ${SCRIPT_DIR}/..
 
-ODPSCMD=~/bin/odpscmd_public/bin/odpscmd
-
 
 function create_table() {
     SQL=$1
 
-    ${ODPSCMD} -f ${SQL}
+    odpscmd -f ${SQL}
 }
 
 for i in $(seq 1 8); do
