@@ -20,12 +20,7 @@ CMD ["/usr/sbin/sshd", "-D"]
 FROM eg_sshd
 RUN apt-get install -y default-jre
 RUN apt-get install -y python
+RUN apt-get install -y vim
 
 RUN mkdir /var/log/nginx
 COPY resources/access.log.20140212.gz /var/log/nginx/
-
-RUN mkdir -p /home/admin/bin
-
-RUN mkdir -p /home/admin/script
-COPY script/parse.py /home/admin/script/
-COPY script/upload.sh /home/admin/script/

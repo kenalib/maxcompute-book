@@ -16,10 +16,8 @@ TABLE=$2
 
 # this should be if on server or on local Mac
 if [[ ${EUID:-${UID}} -eq 0 ]]; then
-    ODPSCMD=/home/admin/bin/odpscmd_public/bin/odpscmd;
     LOG_DIR=/var/log/nginx
 else
-    ODPSCMD=~/bin/odpscmd_public/bin/odpscmd;
     LOG_DIR=input
     cp resources/access.log.${DATE}.gz ${LOG_DIR}
 fi
@@ -37,7 +35,7 @@ mkdir -p ${OUT_DIR}
 function unzip_file() {
     if [ ! -f "$LOG_GZ" ]; then
         echo "file not exist: $LOG_GZ"
-        return 1
+        return 10
     fi
 
     gunzip -kf ${LOG_GZ}
@@ -46,7 +44,7 @@ function unzip_file() {
 }
 
 function upload() {
-    ${ODPSCMD} -e "
+    odpscmd -e "
     tunnel upload ${IN_FILE}.clean ${TABLE} -fd \"\t\" -dfp '$DATEFMT';
     " >> ${OUT_DIR}/log.txt 2>&1
 
@@ -55,7 +53,7 @@ function upload() {
         return 0
     else
         echo 1 > ${OUT_DIR}/result.txt
-        return 1
+        return 100
     fi
 }
 

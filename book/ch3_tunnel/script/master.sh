@@ -3,8 +3,6 @@
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
 cd ${SCRIPT_DIR}/..
 
-ODPSCMD=~/bin/odpscmd_public/bin/odpscmd
-
 REMOTE_SCRIPT=/home/admin/script     # path on remote hosts
 
 # on Mac, use gdate instead of date after brew install coreutils
@@ -22,13 +20,13 @@ mkdir -p ${OUT_DIR}
 
 # 1) create table/partition
 function prepare() {
-    ${ODPSCMD} -e "ALTER TABLE $TABLE DROP IF EXISTS PARTITION (dt='$DATE');"
-    ${ODPSCMD} -e "ALTER TABLE $TABLE ADD PARTITION (dt='$DATE');"
+    odpscmd -e "ALTER TABLE $TABLE DROP IF EXISTS PARTITION (dt='$DATE');"
+    odpscmd -e "ALTER TABLE $TABLE ADD PARTITION (dt='$DATE');"
     return $?
 }
 
 function upload() {
-    pssh -A -h host.txt -i "bash $REMOTE_SCRIPT/upload.sh $DATE $TABLE/dt='$DATE'"
+    pssh -A -h host.txt -i "bash -l $REMOTE_SCRIPT/upload.sh $DATE $TABLE/dt='$DATE'"
     return $?
 }
 

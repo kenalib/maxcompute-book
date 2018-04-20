@@ -1,17 +1,23 @@
-version: '2'
+version: '3'
 services:
     sshd_1:
         build: .
         image: test_sshd
         ports:
             - "32801:22"
+        volumes:
+            - ./script:/home/admin/script
     sshd_2:
         build: .
         image: test_sshd
         ports:
             - "32802:22"
+        volumes:
+            - ./script:/home/admin/script
     sshd_3:
         build: .
         image: test_sshd
         ports:
             - "32803:22"
+        volumes:
+            - ./script:/home/admin/script
